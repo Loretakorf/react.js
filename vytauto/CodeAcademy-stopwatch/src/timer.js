@@ -63,7 +63,7 @@ class Timer extends TimerView {
        this.lapButton.addEventListener("click", () => {
          this.timerState.lap();
        });
-       //End
+      
       }
   } 
   export default Timer;
