@@ -7,7 +7,7 @@ const containerStyle = {
 }
 
 const Container = ({children}) => {
-   
+   console.log(children);
     return <div style={containerStyle}>
         {children}
     </div>
