@@ -21,7 +21,6 @@ function App() {
 
   const updateList = (value) => {
     const newList = [...list, value];
-
     setList(newList);
   };
   return (

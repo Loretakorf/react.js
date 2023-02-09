@@ -4,7 +4,6 @@ const containerStyle = {
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth:"960px",
-   
 }
 
 const Container = ({children}) => {
