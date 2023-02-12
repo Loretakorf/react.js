@@ -1,7 +1,8 @@
+import { useState } from "react";
+
 const wrapperStyle = {
   display: "flex",
   flexDirection: "column",
-  gap: "20px",
 };
 const inputStyle = {
   borderRadius: 0,
@@ -11,33 +12,24 @@ const inputStyle = {
 };
 
 const Input = (props) => {
-  const handleChange = (event) => {
-    props.onChange(event.target.value);
-  };
+  const [value, setValue] = useState(props.value || "");
 
+  const handleChange = (event) => {
+    const myValue = event.target.value;
+   
+    setValue(myValue);
+    if (props.onChange) {
+      props.onChange(myValue);
+    }
+  };
+ 
   return (
     <div style={wrapperStyle}>
+      <label>{props.label}</label>
       <input
-        placeholder="First Name"
-        type="text"
+        type={"text"}
         style={inputStyle}
-        value={props.name}
-        onChange={handleChange}
-      />
-
-      <input
-        placeholder="Last Name"
-        type="text"
-        style={inputStyle}
-        value={props.lastName}
-        onChange={handleChange}
-      />
-
-      <input
-        placeholder="Telephone Number"
-        type="number"
-        style={inputStyle}
-        value={props.number}
+        value={value}
         onChange={handleChange}
       />
     </div>

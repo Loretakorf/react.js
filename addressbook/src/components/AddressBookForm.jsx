@@ -1,11 +1,13 @@
 import Input from "./Input";
 import { useState } from "react";
+
 const formStyle = {
   display: "flex",
   flexDirection: "column",
   height: "45px",
-  width: "200px",
+  width: "260px",
   marginTop: "30px",
+  gap: "20px",
 };
 
 const buttonStyle = {
@@ -18,30 +20,30 @@ const buttonStyle = {
   marginTop: "30px",
 };
 
-const AddressBookForm = (name, lastName, number) => {
+const AddressBookForm = (props) => {
   const [stateName, setStateName] = useState();
   const [stateLastName, setStateLastName] = useState();
   const [stateUserNumber, setStateUserNumber] = useState();
 
-  const handleChange = () => {
-    if (name) {
-      setStateName(stateName);
-      console.log(name)
-    } else if (lastName) {
-      setStateLastName(stateLastName);
-    } else if (number) {
-      setStateUserNumber(stateUserNumber);
-    }
+  const onFirstNameChange = (name) => setStateName(name);
+  const onLastNameChange = (lastName) => setStateLastName(lastName);
+ 
+  const onNumberChange = (phone) => {
+    setStateUserNumber(Number(phone));
+    
   };
-  const handleClick = (props) => {
+  const handleClick = () => {
     if (props.onSubmit) {
-      props.onSubmit();
+      props.onSubmit(stateName, stateLastName, stateUserNumber);
+     
     }
   };
+
   return (
     <div style={formStyle}>
-      <Input onChange={handleChange} />
-
+      <Input label={"First name:"} onChange={onFirstNameChange}/>
+      <Input label={"Last name:"} onChange={onLastNameChange} />
+      <Input label={"Telephone number:"} onChange={onNumberChange} />
       <button style={buttonStyle} onClick={handleClick}>
         Add user
       </button>
