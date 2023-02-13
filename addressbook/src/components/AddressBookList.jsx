@@ -11,8 +11,8 @@ const AddressBookList = (props) => {
     return null;
   }
 
-  const paragraphs = props.state.map((text, index) => {
-    return <p key={text + "-" + index}>{text}</p>;
+  const paragraphs = props.state.map((text) => {
+    return <p key={text}>{text}</p>;
   });
   return <div Style={bookListStyle}>{paragraphs}</div>;
 };
