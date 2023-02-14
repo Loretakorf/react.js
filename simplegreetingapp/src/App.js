@@ -5,13 +5,11 @@ import Pages from "./components/Pages";
 
 function App() {
   return (
-    <div className="App">
-      <Container>
-        <Heading />
-        <Pages />
-        <Footer />
-      </Container>
-    </div>
+    <Container>
+      <Heading />
+      <Pages />
+      <Footer />
+    </Container>
   );
 }
 

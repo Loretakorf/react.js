@@ -4,7 +4,7 @@ const containerStyle = {
     marginTop: "20px",
     maxWidth:"960px",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignContent: "center",
 }
 

@@ -1,7 +1,11 @@
 const headingStyle = {
   backgroundColor: "#716d6d",
   width: "100%",
-  height: "100px",
+  height: "80px",
+  // position: 'fixed',
+  // top: '0',
+  // left: '0',
+  // right: "0",
 };
 const listStyle = {
     display: "flex",
@@ -9,6 +13,7 @@ const listStyle = {
     alignItems: "center",
     gap: "10px",
     listStyle: "none",
+   
 }
 const linkStyle = {
     textDecoration: "none",
@@ -17,7 +22,7 @@ const linkStyle = {
 }
 const Heading = () => {
   return (
-    <div style={headingStyle}>
+    <header style={headingStyle}>
         <ul style={listStyle}>
             <li >
             <a href="#react" style={linkStyle}>About</a>
@@ -29,7 +34,7 @@ const Heading = () => {
             <a href="#react" style={linkStyle}>Contacts</a>
             </li>
         </ul>
-    </div>
+    </header>
   );
 };
 export default Heading;

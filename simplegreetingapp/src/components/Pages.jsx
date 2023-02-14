@@ -1,12 +1,13 @@
 import { useState } from "react";
+import Section from "./Section";
+
 const pageStyle = {
+  display: "flex",
+  flexDirection: "column",
   width: "100%",
   marginTop: "16px",
 };
-const sectionStyle = {
-  marginBottom: "16px",
-  textAlign: "center",
-};
+
 const buttonStyle = {
   borderRadius: 0,
   border: 0,
@@ -17,26 +18,26 @@ const buttonStyle = {
 };
 
 const Pages = () => {
-  const [text, setText] = useState();
-  const myText = "Sveiki atvyke!"
+  const [text, setText] = useState(false);
+ 
   const handleClick = () => {
-    setText(myText);
+    setText(true);
   };
 
   return (
     <div style={pageStyle}>
-      <section style={sectionStyle}>
+      <Section>
         <img
           src="https://expertphotography.b-cdn.net/wp-content/uploads/2022/05/Landscape-Photography-Sophie-Turner.jpg"
           alt=""
         />
-      </section>
-      <section style={sectionStyle}>
+      </Section>
+      <Section>
         <button onClick={handleClick} style={buttonStyle}>
           Spustelk
         </button>
-      </section>
-      <section>{text}</section>
+      </Section>
+      <Section>{text && <p>Sveiki atvyke!</p>}</Section>
     </div>
   );
 };
