@@ -21,16 +21,15 @@ const buttonStyle = {
 };
 
 const AddressBookForm = (props) => {
-  const [stateName, setStateName] = useState();
-  const [stateLastName, setStateLastName] = useState();
+  const [stateName, setStateName] = useState('');
+  const [stateLastName, setStateLastName] = useState('');
   const [stateUserNumber, setStateUserNumber] = useState();
 
   const onFirstNameChange = (name) => setStateName(name);
   const onLastNameChange = (lastName) => setStateLastName(lastName);
- 
+
   const onNumberChange = (phone) => {
     setStateUserNumber(Number(phone));
-    
   };
   const handleClick = () => {
     if (props.onSubmit) {
@@ -41,7 +40,7 @@ const AddressBookForm = (props) => {
 
   return (
     <div style={formStyle}>
-      <Input label={"First name:"} onChange={onFirstNameChange}/>
+      <Input label={"First name:"} onChange={onFirstNameChange} />
       <Input label={"Last name:"} onChange={onLastNameChange} />
       <Input label={"Telephone number:"} onChange={onNumberChange} />
       <button style={buttonStyle} onClick={handleClick}>

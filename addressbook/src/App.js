@@ -3,24 +3,24 @@ import Container from "./components/Container";
 import AddressBookForm from "./components/AddressBookForm";
 import AddressBookList from "./components/AddressBookList";
 
-const user = [{name: "Justas", lastName: "Isaeff", phone: "+37034567891" }]
-
-
+let nextId = 0;
 function App() {
-  const [userList, setList] = useState({user});
- 
-  const updateList = (value) => {
-    const newUserList = [...userList];
-    const result = newUserList.push(value)
-    setList(result);
-    
+  const [stateList, setStateList] = useState([
+    { name: "Justas", lastName: "Isaeff", phone: "+37034567891" },
+  ]);
+  console.log(stateList);
+  const updateList = (name, lastName, phone) => {
+    setStateList([
+      ...stateList,
+      { id: nextId++, name: name, lastName: lastName, phone: phone },
+    ]);
   };
 
   return (
     <div>
       <Container>
         <AddressBookForm onSubmit={updateList} />
-        <AddressBookList list={userList} />
+        <AddressBookList list={stateList} />
       </Container>
     </div>
   );

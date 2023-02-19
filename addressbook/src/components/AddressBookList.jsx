@@ -5,15 +5,16 @@ const bookListStyle = {
   display: "grid",
   gridTemplateColumns: "1fr 1fr 1fr",
   gap: "16px",
-  border: "1px solid grey",
+  backgroundColor: "black",
+  color: "white"
 };
 
-const AddressBookList = (props) => {
-  if (!props.list || !props.list.length) {
+const AddressBookList = ({ list, value }) => {
+  if (!value) {
     return null;
   }
-  const paragraphs = props.list.map((text) => {
-    return <p key={text}>{text}</p>;
+  const paragraphs = list.map((user) => {
+    return  <p key={user.id}>{user.name}</p>;
   });
 
   return <div style={bookListStyle}>{paragraphs}</div>;
