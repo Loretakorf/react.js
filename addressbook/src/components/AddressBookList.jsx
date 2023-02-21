@@ -6,18 +6,18 @@ const bookListStyle = {
   gridTemplateColumns: "1fr 1fr 1fr",
   gap: "16px",
   backgroundColor: "black",
-  color: "white"
+  color: "white",
 };
 
-const AddressBookList = ({ list, value }) => {
+const AddressBookList = ({ lists, value }) => {
   if (!value) {
     return null;
   }
-  const paragraphs = list.map((user) => {
-    return  <p key={user.id}>{user.name}</p>;
-  });
-
-  return <div style={bookListStyle}>{paragraphs}</div>;
+  <div style={bookListStyle}>
+    {lists.map((list) => {
+      return <li key={list.value}>{list.value}</li>;
+    })}
+  </div>;
 };
 
 export default AddressBookList;

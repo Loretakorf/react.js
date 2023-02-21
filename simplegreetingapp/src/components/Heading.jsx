@@ -8,32 +8,29 @@ const headingStyle = {
   // right: "0",
 };
 const listStyle = {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    gap: "10px",
-    listStyle: "none",
-   
-}
+  display: "flex",
+  justifyContent: "space-around",
+  alignItems: "center",
+  gap: "10px",
+  listStyle: "none",
+};
 const linkStyle = {
-    textDecoration: "none",
-    color: "#eee",
-    fontSize: '18px',
-}
-const Heading = () => {
+  
+  color: "#131212",
+  fontSize: "18px",
+};
+const Heading = ({ pages }) => {
   return (
     <header style={headingStyle}>
-        <ul style={listStyle}>
-            <li >
-            <a href="#react" style={linkStyle}>About</a>
-            </li>
-            <li >
-            <a href="#react" style={linkStyle}>React</a>
-            </li>
-            <li >
-            <a href="#react" style={linkStyle}>Contacts</a>
-            </li>
-        </ul>
+      <div style={listStyle}>
+        {pages?.map((page) => {
+          return (
+            <button onClick={page.onClick} key={page.label} style={linkStyle}>
+              {page.label}
+            </button>
+          );
+        })}
+      </div>
     </header>
   );
 };

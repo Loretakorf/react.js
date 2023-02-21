@@ -20,7 +20,7 @@ function App() {
     <div>
       <Container>
         <AddressBookForm onSubmit={updateList} />
-        <AddressBookList list={stateList} />
+        <AddressBookList lists={stateList} />
       </Container>
     </div>
   );
