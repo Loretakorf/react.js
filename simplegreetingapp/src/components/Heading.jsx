@@ -1,11 +1,8 @@
+import {Link} from 'react-router-dom'
 const headingStyle = {
-  backgroundColor: "#716d6d",
+  backgroundColor: "#778d45",
   width: "100%",
   height: "80px",
-  // position: 'fixed',
-  // top: '0',
-  // left: '0',
-  // right: "0",
 };
 const listStyle = {
   display: "flex",
@@ -15,8 +12,8 @@ const listStyle = {
   listStyle: "none",
 };
 const linkStyle = {
-  
-  color: "#131212",
+  marginTop: "25px",
+  color: "#ede6e6",
   fontSize: "18px",
 };
 const Heading = ({ pages }) => {
@@ -24,11 +21,8 @@ const Heading = ({ pages }) => {
     <header style={headingStyle}>
       <div style={listStyle}>
         {pages?.map((page) => {
-          return (
-            <button onClick={page.onClick} key={page.label} style={linkStyle}>
-              {page.label}
-            </button>
-          );
+          return <Link key={page.to} to={page.to} style={linkStyle}>{page.label}</Link>
+       
         })}
       </div>
     </header>

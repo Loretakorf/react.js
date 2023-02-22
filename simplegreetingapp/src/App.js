@@ -1,32 +1,27 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Container from "./components/Container";
+import { Routes, Route } from "react-router-dom";
 import Heading from "./components/Heading";
 import Footer from "./components/Footer";
 import Pages from "./components/Pages";
-import ContactUsPage from "./components/contactUsPage/ContactUsPage";
+import ContactUsPage from "./components/ContactUsPage";
 import Catalog from "./components/Catalog";
+import NotFoundPage from "./components/NotFoundPage";
+import { routes } from "./constants/routes.js";
 
 function App() {
-  const [activePage, setActivePage] = useState("home");
-
   const headerButtons = useMemo(() => {
     return [
       {
-        onClick: () => {
-          setActivePage("home");
-        },
+        to: routes.pages,
         label: "Home",
       },
       {
-        onClick: () => {
-          setActivePage("catalog");
-        },
+        to: routes.catalog,
         label: "Cataloge",
       },
       {
-        onClick: () => {
-          setActivePage("Contact us");
-        },
+        to: routes.contactUsPage,
         label: "Contact Us!",
       },
     ];
@@ -34,10 +29,13 @@ function App() {
   return (
     <Container>
       <Heading pages={headerButtons} />
-      {activePage === 'home' && <Pages />}
-      {activePage === "catalog" && <ContactUsPage />}
-      {activePage === 'contact us' && <Catalog />}
-      
+      <Routes>
+        <Route path={routes.pages} element={<Pages />} />
+        <Route path={routes.catalog} element={<Catalog />} />
+        <Route path={routes.contactUsPage} element={<ContactUsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+
       <Footer />
     </Container>
   );
