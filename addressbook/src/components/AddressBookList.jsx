@@ -13,11 +13,12 @@ const AddressBookList = ({ lists, value }) => {
   if (!value) {
     return null;
   }
-  <div style={bookListStyle}>
-    {lists.map((list) => {
-      return <li key={list.value}>{list.value}</li>;
-    })}
-  </div>;
+  const users = lists.map((list) => {
+    return <p key={list.name}>{list.value}</p>;
+  });
+  return <div style={bookListStyle}>{users}</div>;
 };
+ 
+
 
 export default AddressBookList;
