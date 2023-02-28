@@ -1,0 +1,17 @@
+.textarea {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.text-area {
+    height: 100px;
+}
+.error {
+    border: 1px solid red;
+}
+span {
+    color: red;
+}
+.error::placeholder {
+    color: red;
+}

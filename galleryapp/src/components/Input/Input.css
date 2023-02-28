@@ -1,0 +1,18 @@
+.input {
+    padding: 8px;
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.error {
+    border: 1px solid red;
+   
+}
+.error::placeholder {
+    color: red;
+}
+span {
+    color: red;
+}

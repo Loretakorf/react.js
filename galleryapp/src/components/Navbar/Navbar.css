@@ -1,0 +1,25 @@
+.navbar {
+    background-color: rgb(39, 86, 86);
+    height: 80px;
+    height: 100%;
+}
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.nav-link {
+    color: white;
+    padding: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.nav-link:active {
+    color: rgb(159, 196, 232);
+}
+.nav-link:focus,
+.nav-link:hover {
+  border-bottom: 3px solid;
+}
