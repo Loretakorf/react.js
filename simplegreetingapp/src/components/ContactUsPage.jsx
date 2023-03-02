@@ -8,4 +8,4 @@ const ContactUsPage =() => {
         </>)
     
 }
-export default ContactUsPage
+export default ContactUsPage;

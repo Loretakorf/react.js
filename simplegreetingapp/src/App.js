@@ -8,6 +8,7 @@ import ContactUsPage from "./components/ContactUsPage";
 import Catalog from "./components/Catalog";
 import NotFoundPage from "./components/NotFoundPage";
 import { routes } from "./constants/routes.js";
+import CatalogItem from "./components/CatalogItem";
 
 function App() {
   const headerButtons = useMemo(() => {
@@ -31,8 +32,9 @@ function App() {
       <Heading pages={headerButtons} />
       <Routes>
         <Route path={routes.pages} element={<Pages />} />
-        <Route path={routes.catalog} element={<Catalog />} />
         <Route path={routes.contactUsPage} element={<ContactUsPage />} />
+        <Route path={routes.catalog} element={<Catalog />} />
+        <Route path={routes.catalogItem} element={<CatalogItem />}/>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

@@ -11,7 +11,7 @@ export const TextArea = ({placeholder, label, onChange, id, error}) => {
       id={id}
       error={error}
     />
-    
+     {error && <p className="error">Error</p>}
     </div>
   );
 };

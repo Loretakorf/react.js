@@ -5,7 +5,7 @@ export const Input = ({ placeholder, type, label, onChange, id, error }) => {
     <div className="input-container">
       <label>{label}</label>
       <input
-        className={ error ? "error" : "input"}
+        className={error ? "error" : "input"}
         label={label}
         placeholder={placeholder}
         type={type}
@@ -13,8 +13,7 @@ export const Input = ({ placeholder, type, label, onChange, id, error }) => {
         error={error}
         onChange={onChange}
       />
-     
+      {error && <p className="error">Error</p>}
     </div>
   );
- 
 };

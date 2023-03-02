@@ -7,17 +7,14 @@ import "./CustomerSupportForm.css";
 
 export const CustomerSupportForm = () => {
   const [person, setPerson] = useState({});
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  function handleFullNameChange(e, error) {
-   if(!error === "") {
+  function handleFullNameChange(e) {
     setPerson({
       ...person,
       fullName: e.target.value,
     });
-   }
-   
   }
 
   function handleEmailChange(e) {
@@ -33,17 +30,20 @@ export const CustomerSupportForm = () => {
       message: e.target.value,
     });
   }
-  console.log(person);
+ 
 
   const onSave = (props) => {
     setIsActive(!isActive);
-    setError(error, "Error");
+    setError(error);
     setPerson(person);
 
+    console.log(person);
     if (props.onSubmit) {
       props.onSubmit();
-    } 
+    }
   };
+
+  
   return (
     <div className="wrapper">
       <Topic
@@ -51,13 +51,15 @@ export const CustomerSupportForm = () => {
         paragraph="We take every request into a consideration and we will reach out to you as fast as possible"
       />
       <form className="form">
-         <Input
+        <Input
           placeholder="Full name"
           label={isActive ? "Full Name" : ""}
           type="text"
           id="fullName"
           onChange={handleFullNameChange}
+         
         />
+       
 
         <Input
           placeholder="Email"
@@ -65,6 +67,7 @@ export const CustomerSupportForm = () => {
           type="email"
           id="email"
           onChange={handleEmailChange}
+          
         />
 
         <TextArea
@@ -72,6 +75,7 @@ export const CustomerSupportForm = () => {
           label={isActive ? "Your message to us" : ""}
           id="message"
           onChange={handleMessageChange}
+         
         />
       </form>
 

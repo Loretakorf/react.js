@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 
 export const useList = () => {
   const [list, setList] = useState([]);
-  useEffect(() => {
-    getList().then((data) => {
-      setList(data.documents);
-    });
-  }, []);
-  const reloadData = () => {
-    getList().then((data) => {
-      setList(data.documents);
-    });
+  const [loading, setLoading] = useState(false);
+  const handleLoad = async () => {
+    setLoading(true);
+    const data = await getList();
+    setLoading(false);
+    setList(data.documents);
   };
-  return { list, reloadData };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
+
+  return { list, reloadData: handleLoad, loading };
 };

@@ -1,13 +1,12 @@
 import { Button, Typography, Box, TextField } from "@mui/material";
-import { postList } from '../servises/postList'
+import { postList } from "../servises/postList";
 
-
-const TodoForm = ({onSubmit, onClose}) => {
+const TodoForm = ({ onSubmit, onClose }) => {
   return (
     <Box display="flex" flexDirection="column" gap={3}>
       <Typography variant="h4">Add new Todo</Typography>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
 
           const formData = new FormData(e.target);
@@ -17,11 +16,9 @@ const TodoForm = ({onSubmit, onClose}) => {
           for (let [name, value] of formData.entries()) {
             todo[name] = value;
           }
-          postList(todo).then(() => {
-           if (onSubmit) onSubmit();
-           if(onClose) onClose()
-            
-          })
+          await postList(todo);
+          onSubmit?.();
+          onClose?.();
         }}
       >
         <Box />
