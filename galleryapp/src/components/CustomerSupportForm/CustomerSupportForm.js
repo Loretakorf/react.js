@@ -7,7 +7,7 @@ import "./CustomerSupportForm.css";
 
 export const CustomerSupportForm = () => {
   const [person, setPerson] = useState({});
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [isActive, setIsActive] = useState(false);
 
   function handleFullNameChange(e) {
@@ -30,11 +30,10 @@ export const CustomerSupportForm = () => {
       message: e.target.value,
     });
   }
- 
 
   const onSave = (props) => {
     setIsActive(!isActive);
-    setError(error);
+    setError(!error);
     setPerson(person);
 
     console.log(person);
@@ -43,7 +42,6 @@ export const CustomerSupportForm = () => {
     }
   };
 
-  
   return (
     <div className="wrapper">
       <Topic
@@ -57,9 +55,7 @@ export const CustomerSupportForm = () => {
           type="text"
           id="fullName"
           onChange={handleFullNameChange}
-         
         />
-       
 
         <Input
           placeholder="Email"
@@ -67,7 +63,6 @@ export const CustomerSupportForm = () => {
           type="email"
           id="email"
           onChange={handleEmailChange}
-          
         />
 
         <TextArea
@@ -75,7 +70,6 @@ export const CustomerSupportForm = () => {
           label={isActive ? "Your message to us" : ""}
           id="message"
           onChange={handleMessageChange}
-         
         />
       </form>
 

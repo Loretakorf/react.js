@@ -1,5 +1,6 @@
 import "./Input.css";
 
+
 export const Input = ({ placeholder, type, label, onChange, id, error }) => {
   return (
     <div className="input-container">
@@ -12,6 +13,7 @@ export const Input = ({ placeholder, type, label, onChange, id, error }) => {
         id={id}
         error={error}
         onChange={onChange}
+        required
       />
       {error && <p className="error">Error</p>}
     </div>

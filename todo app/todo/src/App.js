@@ -8,27 +8,44 @@ import { useList } from "./hooks/useList";
 import { useModal } from "./hooks/useModal";
 import { TodoSkeleton } from "./components/TodoSkeleton";
 import { Fragment } from "react";
-
+import { TodoModal } from "./components/TodoModal";
+import { useState } from "react";
 
 function App() {
   const { list, reloadData, loading } = useList();
-  const { openModal, open, close } = useModal();
-
+  const { open, onOpen, onClose } = useModal();
+  const [editData, setEditData] = useState(null);
+  // console.log(list);
   return (
     <div className="App">
       <CssBaseline />
       <Container maxWidth="sm">
         <Heading />
-        <AddNewTodo onOpen={open} onClose={close} isOpen={openModal}>
-          <TodoForm onSubmit={reloadData} onClose={close} />
-        </AddNewTodo>
+        <AddNewTodo onOpen={onOpen} />
+
+        <TodoModal
+          open={open}
+          onClose={() => {
+            onClose();
+            setEditData(null);
+          }}
+        >
+          <TodoForm
+            onClose={() => {
+              onClose();
+              reloadData();
+              setEditData(null);
+            }}
+            editData={editData}
+          />
+        </TodoModal>
+
         {loading ? (
           <Fragment>
-            <TodoSkeleton/>
-            <TodoSkeleton/>
-            <TodoSkeleton/>
+            <TodoSkeleton />
+            <TodoSkeleton />
+            <TodoSkeleton />
           </Fragment>
-        
         ) : (
           list.map((item) => (
             <TodoCard
@@ -38,6 +55,10 @@ function App() {
               completed={item.completed}
               description={item.description}
               onReload={reloadData}
+              onEdit={() => {
+                onOpen();
+                setEditData(item);
+              }}
             />
           ))
         )}

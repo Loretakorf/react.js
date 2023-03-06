@@ -12,10 +12,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
 import { useDelete } from "../hooks/useDelete";
 import { useUpdate } from "../hooks/useUpdate";
 
-const TodoCard = ({ title, description, id, onReload, completed }) => {
+const TodoCard = ({ title, description, id, onReload, completed, onEdit }) => {
   const { openDialogDelete, closeDeleteDialog, handleDelete, isOpen } =
     useDelete(id, onReload);
 
@@ -69,6 +70,16 @@ const TodoCard = ({ title, description, id, onReload, completed }) => {
                 Incomplete
               </Button>
             )}
+             <Button
+              variant="contained"
+              color="secondary"
+              size="small"
+              startIcon={<EditIcon />}
+              onClick={onEdit}
+            >
+              edit
+            </Button>
+
             <Button
               variant="contained"
               color="error"
