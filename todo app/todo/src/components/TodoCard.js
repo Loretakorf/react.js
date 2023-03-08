@@ -16,9 +16,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useDelete } from "../hooks/useDelete";
 import { useUpdate } from "../hooks/useUpdate";
 
-const TodoCard = ({ title, description, id, onReload, completed, onEdit }) => {
+const TodoCard = ({ title, description, id, onReload, completed,onError, onEdit }) => {
   const { openDialogDelete, closeDeleteDialog, handleDelete, isOpen } =
-    useDelete(id, onReload);
+    useDelete(id, onReload, () => {
+      onError(
+        `could not update the task by the name of ${title}.`
+      )
+    });
 
   const { onComplete, onIncomplete } = useUpdate({
     id,
@@ -26,6 +30,7 @@ const TodoCard = ({ title, description, id, onReload, completed, onEdit }) => {
     description,
     completed,
     onReload,
+    onError,
   });
 
   return (

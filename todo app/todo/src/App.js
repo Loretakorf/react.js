@@ -10,12 +10,20 @@ import { TodoSkeleton } from "./components/TodoSkeleton";
 import { Fragment } from "react";
 import { TodoModal } from "./components/TodoModal";
 import { useState } from "react";
+import Alert from "@mui/material/Alert";
+
+import Box from "@mui/material/Box";
 
 function App() {
-  const { list, reloadData, loading } = useList();
+  const { list, reloadData, loading, error: loadingError } = useList();
   const { open, onOpen, onClose } = useModal();
   const [editData, setEditData] = useState(null);
-  // console.log(list);
+  const [listErrors, setListErrors] = useState([]);
+
+  const addListError = (errorMessage) => {
+    setListErrors([...listErrors, errorMessage])
+  };
+  
   return (
     <div className="App">
       <CssBaseline />
@@ -40,6 +48,18 @@ function App() {
           />
         </TodoModal>
 
+        {loadingError && (
+          <Box marginBottom={2}>
+            <Alert severity="error">{loadingError}</Alert>
+          </Box>
+        )}
+        {listErrors.length > 0 &&
+          listErrors.map((errorMessage, i) => (
+            <Box marginBottom={2} key={errorMessage + i}>
+              <Alert severity="error">{errorMessage}</Alert>
+            </Box>
+          ))}
+
         {loading ? (
           <Fragment>
             <TodoSkeleton />
@@ -59,6 +79,7 @@ function App() {
                 onOpen();
                 setEditData(item);
               }}
+              onError={addListError}
             />
           ))
         )}

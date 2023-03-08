@@ -7,6 +7,6 @@ export const postList = (todo) => {
         body: JSON.stringify(todo),
         })
     .then(response => response.json())
-    .catch(console.error)
+   
         
 }   

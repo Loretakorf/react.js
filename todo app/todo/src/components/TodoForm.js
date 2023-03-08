@@ -1,8 +1,9 @@
-import { Button, Typography, Box, TextField } from "@mui/material";
+import { Button, Typography, Box, TextField, Alert } from "@mui/material";
 import { postList } from "../servises/postList";
 import { useForm } from "react-hook-form";
 import { updateTodo } from "./updateTodo";
-
+import { useState } from "react";
+//
 // onSubmit={async (e) => {
 //   e.preventDefault();
 
@@ -18,6 +19,8 @@ import { updateTodo } from "./updateTodo";
 //   onClose?.();
 // }}
 const TodoForm = ({ onClose, editData }) => {
+  const [error, setError] = useState();
+
   console.log(editData);
   const { register, handleSubmit } = useForm({
     defaultValues: editData || {
@@ -32,15 +35,20 @@ const TodoForm = ({ onClose, editData }) => {
       <Typography variant="h4">
         {editData ? "Edit Todo" : "Add Todo"}
       </Typography>
+
+      {error && <Alert severity="error">{error}</Alert>}
       <form
         onSubmit={handleSubmit(async (data) => {
-          if(editData) {
-            await updateTodo(data)
-          } else {
-            await postList(data);
+          try {
+            if (editData) {
+              await updateTodo(data);
+            } else {
+              await postList(data);
+            }
+            onClose?.();
+          } catch (_) {
+            setError("could not save Todo.Please try again");
           }
-          
-          onClose?.();
         })}
       >
         <Box />

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { deleteList } from "../servises/deleteList";
 
-export const useDelete = (id, onDelete) => {
+export const useDelete = (id, onDelete, onError) => {
   const [open, setOpen] = useState();
 
   const openDialogDelete = () => {
@@ -11,9 +11,15 @@ export const useDelete = (id, onDelete) => {
     setOpen(false);
   };
   const handleDelete = async () => {
-    await deleteList(id);
+    try {
+      await deleteList(id);
+      onDelete?.();
+    } catch (e) {
+      onError();
+    }
+   closeDeleteDialog()
     // if (onDelete) onDelete();
-    onDelete?.();
+   
   };
   return {
     openDialogDelete,
