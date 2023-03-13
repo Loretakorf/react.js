@@ -11,4 +11,27 @@
     align-items: center;
     justify-content: center;
 }
+.input-label {
+    color: white;
+}
+
+span {
+    color: red;
+    display: none;
+}
+input:invalid[focused="true"] {
+    border: 2px solid red;
+}
+
+input:invalid[focused="true"] ~ span{
+    display: block;
+}
+textarea:invalid[focused="true"] ~ .span{
+    display: block;
+}
+textarea:required:invalid[focused="true"] {
+    border: 2px solid red;
+}
+
+
 

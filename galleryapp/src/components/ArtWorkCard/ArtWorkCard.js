@@ -1,12 +1,12 @@
 import React from "react";
-import "./PictureCard.css"
+import "./ArtWorkCard.css"
 
-const PictureCard = ({ src, alt, className= "", author }) => {
+const ArtWorkCard = ({ src, alt, className= "", title }) => {
     return (
       <div className="img-container">
         <img className={`${className}`} src={src} alt={alt} />
-        <p>{author}</p>
+        <p>{title}</p>
       </div>
     );
   };
-  export default PictureCard;
+  export default ArtWorkCard;

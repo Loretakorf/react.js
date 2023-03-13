@@ -9,7 +9,7 @@ import { useModal } from "./hooks/useModal";
 import { TodoSkeleton } from "./components/TodoSkeleton";
 import { Fragment } from "react";
 import { TodoModal } from "./components/TodoModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alert from "@mui/material/Alert";
 
 import Box from "@mui/material/Box";
@@ -21,9 +21,19 @@ function App() {
   const [listErrors, setListErrors] = useState([]);
 
   const addListError = (errorMessage) => {
-    setListErrors([...listErrors, errorMessage])
+    setListErrors([...listErrors, errorMessage]);
   };
-  
+
+  useEffect(() => {
+    if (!listErrors.length) {
+      return;
+    }
+    const clearFirstError = () => {
+      setListErrors((currentListError) => currentListError.slice(1));
+      //setState((currentState) => {return [...currentState, your update here]})
+    }
+    setTimeout(clearFirstError, 10 * 1000);
+  }, [listErrors]);
   return (
     <div className="App">
       <CssBaseline />
@@ -54,7 +64,7 @@ function App() {
           </Box>
         )}
         {listErrors.length > 0 &&
-          listErrors.map((errorMessage, i) => (
+          listErrors.slice(-3).map((errorMessage, i) => (
             <Box marginBottom={2} key={errorMessage + i}>
               <Alert severity="error">{errorMessage}</Alert>
             </Box>

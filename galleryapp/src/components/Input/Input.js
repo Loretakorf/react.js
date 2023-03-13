@@ -1,21 +1,36 @@
 import "./Input.css";
-
-
-export const Input = ({ placeholder, type, label, onChange, id, error }) => {
+import { useState } from "react";
+export const Input = ({
+  placeholder,
+  type,
+  label,
+  onChange,
+  id,
+  error,
+  name,
+  errorMessage,
+  pattern
+}) => {
+  const[ focused, setFocused] = useState(false)
+  const handleIsFocused = (e) => {
+    setFocused(true)
+  }
   return (
     <div className="input-container">
-      <label>{label}</label>
+      <label className="input-label">{label}</label>
       <input
-        className={error ? "error" : "input"}
+        pattern={pattern}
         label={label}
         placeholder={placeholder}
         type={type}
         id={id}
+        name={name}
         error={error}
+        onBlur={handleIsFocused}
+        focused={focused.toString()}
         onChange={onChange}
-        required
       />
-      {error && <p className="error">Error</p>}
+      <span>{errorMessage}</span>
     </div>
   );
 };

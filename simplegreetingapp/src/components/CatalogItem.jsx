@@ -1,6 +1,11 @@
 import { useParams } from "react-router-dom";
 import { items } from "../constants/items";
 
+// const t = require("./sample.JSON");
+// console.log(t);
+// console.log(JSON.parse(JSON.stringify(t)));
+
+
 const CatalogItem = () => {
   const { id } = useParams();
   console.log(id);

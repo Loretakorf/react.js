@@ -3,15 +3,13 @@
     flex-direction: column;
     gap: 5px;
 }
-.text-area {
+textarea {
     height: 100px;
+    padding: 8px;
 }
-.error {
-    border: 1px solid red;
-}
-span {
+.span {
     color: red;
+    display: none;
 }
-.error::placeholder {
-    color: red;
-}
+
+

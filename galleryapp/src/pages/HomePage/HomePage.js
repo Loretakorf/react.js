@@ -1,22 +1,23 @@
 import Topic from "../../components/Topic/Topic";
 import Button from "../../components/Button/Button";
 import Grid from "../../components/Grid/Grid";
-import PictureCard from "../../components/PictureCard/PictureCard";
+import ArtWorkCard from "../../components/ArtWorkCard/ArtWorkCard";
 import { useState, useEffect } from "react";
 import "./HomePage.css";
 import "../../components/Button/Button.css";
 
-function getImages() {
-  return fetch("https://picsum.photos/v2/list?page=2&limit=4").then((res) =>
-    res.json()
-  );
-}
-
 const HomePage = () => {
-  const [pictureCardList, setPictureCardList] = useState([]);
+  const [artWorkList, setArtWorkList] = useState();
 
   useEffect(() => {
-    getImages().then((pictureCardData) => setPictureCardList(pictureCardData));
+    fetch("https://api.artsy.net/api/artworks?total_count=1&size=1", {
+      headers: {
+        "X-Xapp-Token":
+          "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsInN1YmplY3RfYXBwbGljYXRpb24iOiI2NDBhMmZjMDBkNDQxZDAwMGJjNGNlYjQiLCJleHAiOjE2Nzg5OTM5ODQsImlhdCI6MTY3ODM4OTE4NCwiYXVkIjoiNjQwYTJmYzAwZDQ0MWQwMDBiYzRjZWI0IiwiaXNzIjoiR3Jhdml0eSIsImp0aSI6IjY0MGEyZmMwMTc4ZGE4MDAwY2ZlYjEzNyJ9.5Y9l-YV9urcOZiYv_zGsb_oAsiZ2kWjuYqpg8WmKKDk",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setArtWorkList(data));
   }, []);
 
   const [isShowingMore, setIsShowingMore] = useState(false);
@@ -27,10 +28,19 @@ const HomePage = () => {
   return (
     <div>
       <>
-        <Grid columns={4}>
-          {pictureCardList.map(({ download_url, author, id }) => {
+        <Grid columns={1}>
+          {artWorkList?._embedded.artworks.map((artwork, artist, id) => {
             return (
-              <PictureCard src={download_url} alt={author} key={author + id} className="img-home"/>
+              <ArtWorkCard
+                src={artwork._links.image.href.replace(
+                  "(image_version)",
+                  "large"
+                )}
+                alt={artist}
+                key={artist + id}
+                // author={author}
+                className="img-home"
+              />
             );
           })}
         </Grid>

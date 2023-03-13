@@ -21,7 +21,6 @@ import { useState } from "react";
 const TodoForm = ({ onClose, editData }) => {
   const [error, setError] = useState();
 
-  console.log(editData);
   const { register, handleSubmit } = useForm({
     defaultValues: editData || {
       title: "",
@@ -45,6 +44,7 @@ const TodoForm = ({ onClose, editData }) => {
             } else {
               await postList(data);
             }
+            setError()
             onClose?.();
           } catch (_) {
             setError("could not save Todo.Please try again");

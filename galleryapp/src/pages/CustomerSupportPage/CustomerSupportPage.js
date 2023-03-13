@@ -1,12 +1,7 @@
 import { CustomerSupportForm } from "../../components/CustomerSupportForm/CustomerSupportForm";
 import "./CustomerSupportPage.css";
-const CustomerSupportPage = () => {
-  const onSave = (e) => {
-    e.preventDefault();
-   
+const CustomerSupportPage = (onSave) => {
 
-    onSave?.();
-  };
   return (
     <div className="support-page">
       <CustomerSupportForm onSave={onSave} />

@@ -19,3 +19,20 @@ const Catalog = () => {
   );
 };
 export default Catalog;
+
+// import { useEffect } from "react";
+// import { useNavigate, Navigate } from "react-router-dom";
+// const ShoppingCart = ({ isAuthenticated }) => {
+//   const navigate = useNavigate();
+//   if (!isAuthenticated) {
+//     return <Navigate to="/" />;
+//   }
+//   const onSubmit = (e) => {
+//     e.preventDefault();
+//     // send data to back end
+//     navigate("/");
+//   };
+//   return (
+//     <form>      <input type="text" />      <button onClick={onSubmit}>save</button>    </form>  );
+// };
+// export default ShoppingCart;

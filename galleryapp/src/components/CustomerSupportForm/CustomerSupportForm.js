@@ -3,78 +3,55 @@ import { TextArea } from "../TextArea/TextArea";
 import Topic from "../Topic/Topic";
 import Button from "../Button/Button";
 import { useState } from "react";
-
+import { inputs } from "../../constants/inputs";
 import "./CustomerSupportForm.css";
 
 export const CustomerSupportForm = () => {
-  const [person, setPerson] = useState({});
-  const [error, setError] = useState(null);
-  const [isActive, setIsActive] = useState(false);
-
-  function handleFullNameChange(e) {
-    setPerson({
-      ...person,
-      fullName: e.target.value,
-    });
-  }
-
-  function handleEmailChange(e) {
-    setPerson({
-      ...person,
-      email: e.target.value,
-    });
-  }
-
-  function handleMessageChange(e) {
-    setPerson({
-      ...person,
-      message: e.target.value,
-    });
-  }
-
-  const onSave = (props) => {
-    setIsActive(!isActive);
-    setError(!error);
-    setPerson(person);
-
-    console.log(person);
+  const [person, setPerson] = useState({
+    fullName: "",
+    email: "",
+    message: "",
+  });
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const onChange = (e) => {
+    setPerson({ ...person, [e.target.name]: e.target.value });
+  };
+   const onSave = (props) => {
+  
     if (props.onSubmit) {
       props.onSubmit();
     }
-  };
-
+  }
+console.log(person);
   return (
     <div className="wrapper">
       <Topic
         title="Contact customer support"
         paragraph="We take every request into a consideration and we will reach out to you as fast as possible"
       />
-      <form className="form">
-        <Input
-          placeholder="Full name"
-          label={isActive ? "Full Name" : ""}
-          type="text"
-          id="fullName"
-          onChange={handleFullNameChange}
-        />
-
-        <Input
-          placeholder="Email"
-          label={isActive ? "Email" : ""}
-          type="email"
-          id="email"
-          onChange={handleEmailChange}
-        />
-
+      <form className="form" onSubmit={handleSubmit}>
+        {inputs.map((input) => (
+          <Input
+            key={input.id}
+            {...input}
+            value={person[input.name]}
+            onChange={onChange}
+          />
+        ))}
+        ;
         <TextArea
           placeholder="Your message to us"
-          label={isActive ? "Your message to us" : ""}
+          label={"Your message to us"}
           id="message"
-          onChange={handleMessageChange}
+          onChange={onChange}
+          pattern="^[A-Za-z0-9]{5,180}$"
         />
       </form>
 
-      <Button label={"Save"} className="form-btn" onClick={onSave} />
+      <Button label={"Save"} className="form-btn" onClick={onSave}/>
     </div>
   );
 };
