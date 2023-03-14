@@ -29,16 +29,16 @@ const HomePage = () => {
     <div>
       <>
         <Grid columns={1}>
-          {artWorkList?._embedded.artworks.map((artwork, artist, id) => {
+          {artWorkList?._embedded.artworks.map((artwork, artist, id, title) => {
             return (
               <ArtWorkCard
                 src={artwork._links.image.href.replace(
-                  "(image_version)",
+                  "{image_version}",
                   "large"
                 )}
                 alt={artist}
                 key={artist + id}
-                // author={author}
+                title={title}
                 className="img-home"
               />
             );

@@ -3,30 +3,29 @@ import { useEffect, useState } from "react";
 import "./GalleryPage.css";
 import ArtWorkCard from "../../components/ArtWorkCard/ArtWorkCard.js";
 import Topic from "../../components/Topic/Topic.js";
-import { getImages } from "../../constants/getImages";
 import Button from "../../components/Button/Button";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import Component from "../../components/Component/Component";
+import { getImages } from "../../constants/getImages";
 
 const GalleryPage = () => {
   const [artWorkList, setArtWorkList] = useState();
   const [loading, setLoading] = useState(false);
-  const [errMessage, setErrMessage] = useState();
 
-  const handleLoading = async () => {
+  const handleLoad = async () => {
     setLoading(true);
     try {
       const data = await getImages();
-      setArtWorkList(data.documents);
-    } catch (errMessage) {
-      setErrMessage("Something went wrong!");
+      setArtWorkList(data);
+    } catch (error) {
+      console.log(error);
     }
     setLoading(false);
   };
+
   useEffect(() => {
-    handleLoading();
+    handleLoad();
   }, []);
-  
+
   const onNextPage = () => {
     fetch(artWorkList._links.next.href, {
       headers: {
@@ -39,39 +38,33 @@ const GalleryPage = () => {
   };
   return (
     <div>
-      {errMessage ? (
-        "Something went wrong!"
+      <Topic
+        title="Collection"
+        paragraph="Reflecting a broad range of styles and ideas, the collection introduces viewers to the main processes and developments in art of the last 60 years. The collection is continually supplemented with new and relevant works of Lithuanian art."
+      />
+
+      {loading ? (
+        <Component />
       ) : (
-        <Topic
-          title="Collection"
-          paragraph="Reflecting a broad range of styles and ideas, the collection introduces viewers to the main processes and developments in art of the last 60 years. The collection is continually supplemented with new and relevant works of Lithuanian art."
-        />
-      )}
-      {!errMessage && (
         <Grid columns={3}>
-          {loading ? (
-            <Skeleton />
-          ) : (
-            artWorkList?._embedded.artworks.map(
-              (artwork, artist, id, title) => {
-                return (
-                  <ArtWorkCard
-                    src={artwork._links.image.href.replace(
-                      "(image_version)",
-                      "large"
-                    )}
-                    title={title}
-                    alt={artist}
-                    key={id}
-                    // author={author}
-                    className="img"
-                  />
-                );
-              }
-            )
-          )}
+          {artWorkList?._embedded.artworks.map((artwork, artist, id, title) => {
+            return (
+              <ArtWorkCard
+                src={artwork._links.image.href.replace(
+                  "{image_version}",
+                  "large"
+                )}
+                title={artwork.title}
+                alt={artist}
+                key={artwork.id}
+                // author={author}
+                className="img"
+              />
+            );
+          })}
         </Grid>
       )}
+
       <Button onClick={onNextPage} className={"btn"} label="Next" />
     </div>
   );

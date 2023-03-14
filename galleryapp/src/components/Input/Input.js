@@ -19,12 +19,12 @@ export const Input = ({
     <div className="input-container">
       <label className="input-label">{label}</label>
       <input
+        required
         pattern={pattern}
         label={label}
         placeholder={placeholder}
         type={type}
         id={id}
-        name={name}
         error={error}
         onBlur={handleIsFocused}
         focused={focused.toString()}

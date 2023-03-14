@@ -3,7 +3,7 @@ import { TextArea } from "../TextArea/TextArea";
 import Topic from "../Topic/Topic";
 import Button from "../Button/Button";
 import { useState } from "react";
-import { inputs } from "../../constants/inputs";
+// import { inputs } from "../../constants/inputs";
 import "./CustomerSupportForm.css";
 
 export const CustomerSupportForm = () => {
@@ -33,21 +33,27 @@ console.log(person);
         paragraph="We take every request into a consideration and we will reach out to you as fast as possible"
       />
       <form className="form" onSubmit={handleSubmit}>
-        {inputs.map((input) => (
-          <Input
-            key={input.id}
-            {...input}
-            value={person[input.name]}
-            onChange={onChange}
-          />
-        ))}
-        ;
+        <Input
+         placeholder="Full Name"
+         label={"Your full name"}
+         name="name"
+         id="fullName"
+         pattern="^[A-Za-z0-9]{3,16}$"
+         error="Full name should be 3-16 characters"
+         onChange={onChange}/>
+        <Input
+         placeholder="Email"
+         name="email"
+         label={"Email"}
+         id="email"
+         error="It should be a valid email address"
+         onChange={onChange}/>
         <TextArea
           placeholder="Your message to us"
           label={"Your message to us"}
           id="message"
+          name="message"
           onChange={onChange}
-          pattern="^[A-Za-z0-9]{5,180}$"
         />
       </form>
 

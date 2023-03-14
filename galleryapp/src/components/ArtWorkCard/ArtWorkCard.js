@@ -5,7 +5,7 @@ const ArtWorkCard = ({ src, alt, className= "", title }) => {
     return (
       <div className="img-container">
         <img className={`${className}`} src={src} alt={alt} />
-        <p>{title}</p>
+        <p className="artwork-title">{title}</p>
       </div>
     );
   };

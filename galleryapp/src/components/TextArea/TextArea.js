@@ -6,7 +6,6 @@ export const TextArea = ({
   onChange,
   id,
   error,
-  pattern,
 }) => {
   const [focused, setFocused] = useState(false);
   const handleIsFocused = (e) => {
@@ -22,7 +21,8 @@ export const TextArea = ({
         onChange={onChange}
         id={id}
         error={error}
-        pattern={pattern}
+        cols="30"
+        row="10"
         onBlur={handleIsFocused}
         focused={focused.toString()}
       />
