@@ -6,10 +6,12 @@ import Topic from "../../components/Topic/Topic.js";
 import Button from "../../components/Button/Button";
 import Component from "../../components/Component/Component";
 import { getImages } from "../../constants/getImages";
+import { headers } from "../../constants/headers";
 
 const GalleryPage = () => {
   const [artWorkList, setArtWorkList] = useState();
   const [loading, setLoading] = useState(false);
+  const [index, setIndex] = useState(1);
 
   const handleLoad = async () => {
     setLoading(true);
@@ -27,11 +29,9 @@ const GalleryPage = () => {
   }, []);
 
   const onNextPage = () => {
+    setIndex(index + 1);
     fetch(artWorkList._links.next.href, {
-      headers: {
-        "X-Xapp-Token":
-          "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsInN1YmplY3RfYXBwbGljYXRpb24iOiI2NDBhMmZjMDBkNDQxZDAwMGJjNGNlYjQiLCJleHAiOjE2Nzg5OTM5ODQsImlhdCI6MTY3ODM4OTE4NCwiYXVkIjoiNjQwYTJmYzAwZDQ0MWQwMDBiYzRjZWI0IiwiaXNzIjoiR3Jhdml0eSIsImp0aSI6IjY0MGEyZmMwMTc4ZGE4MDAwY2ZlYjEzNyJ9.5Y9l-YV9urcOZiYv_zGsb_oAsiZ2kWjuYqpg8WmKKDk",
-      },
+      headers,
     })
       .then((response) => response.json())
       .then((data) => setArtWorkList(data));
@@ -44,10 +44,10 @@ const GalleryPage = () => {
       />
 
       {loading ? (
-        <Component />
+        <Component className="loading" />
       ) : (
         <Grid columns={3}>
-          {artWorkList?._embedded.artworks.map((artwork, artist, id, title) => {
+          {artWorkList?._embedded.artworks.map((artwork, artist) => {
             return (
               <ArtWorkCard
                 src={artwork._links.image.href.replace(
@@ -56,8 +56,8 @@ const GalleryPage = () => {
                 )}
                 title={artwork.title}
                 alt={artist}
+                id={artwork.id}
                 key={artwork.id}
-                // author={author}
                 className="img"
               />
             );
@@ -65,7 +65,7 @@ const GalleryPage = () => {
         </Grid>
       )}
 
-      <Button onClick={onNextPage} className={"btn"} label="Next" />
+      <Button onClick={onNextPage} className={"btn"} label={`${index} page`} />
     </div>
   );
 };

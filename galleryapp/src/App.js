@@ -8,6 +8,7 @@ import GalleryPage from "./pages/GalleryPage/GalleryPage.js";
 import CustomerSupportPage from "./pages/CustomerSupportPage/CustomerSupportPage.js";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { routes } from "./constants/routes.js";
+import ArtworkPage from "./pages/ArtworkPage/ArtworkPage";
 
 function App() {
   const headerLinks = useMemo(() => {
@@ -32,6 +33,7 @@ function App() {
       <Navbar pages={headerLinks} />
       <Layout>
         <Routes>
+          <Route path={routes.artworkPage} element={<ArtworkPage/>}/>
           <Route path={routes.homePage} element={<HomePage />} />
           <Route path={routes.galleryPage} element={<GalleryPage />} />
           <Route

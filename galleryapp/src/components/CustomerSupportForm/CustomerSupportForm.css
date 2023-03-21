@@ -12,14 +12,21 @@
     justify-content: center;
 }
 .input-label {
-    color: white;
+    color: rgb(232, 218, 218);
 }
-
+.hi {
+    color: rgb(232, 218, 218);
+    margin-top: 10px;
+}
+input,
+textarea {
+    background-color: rgb(204, 191, 191);
+}
 span {
     color: red;
     display: none;
 }
-input:invalid[focused="true"] {
+input:required:invalid[focused="true"] {
     border: 2px solid red;
 }
 
@@ -31,6 +38,10 @@ textarea:invalid[focused="true"] ~ .span{
 }
 textarea:required:invalid[focused="true"] {
     border: 2px solid red;
+}
+input::placeholder,
+textarea::placeholder {
+    color: black;
 }
 
 

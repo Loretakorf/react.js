@@ -26,7 +26,7 @@ export const TextArea = ({
         onBlur={handleIsFocused}
         focused={focused.toString()}
       />
-      <span className="span">Your message should from 10 characters</span>
+      <span className="span">{error}</span>
     </div>
   );
 };

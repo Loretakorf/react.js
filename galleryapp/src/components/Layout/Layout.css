@@ -5,7 +5,7 @@
   margin-top: 60px;
   font-size: 26px;
   text-transform: uppercase;
-  color: white;
+  color: rgb(232, 218, 218);
 }
 
 .text {
@@ -14,4 +14,24 @@
 }
 button {
     margin-top: 40px;
-}  
+} 
+.loading {
+  display: flex;
+  justify-content: center;
+} 
+.artwork-description p {
+  margin-bottom: 5px;
+}
+select {
+  background-color: rgb(213, 188, 188);
+  padding: 5px;
+}
+.dropdown {
+  margin: 20px;
+}
+option {
+  
+  color: black;
+}
+
+
